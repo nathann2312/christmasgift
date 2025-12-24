@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Christmas Present</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  height:100vh;
+  font-family:'Segoe UI',sans-serif;
+  background:
+    radial-gradient(circle at 70% 20%, #ffffff22, transparent 30%),
+    linear-gradient(to bottom,#08163a,#02030a);
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+}
+
+/* BINTANG */
+.star{
+  position:absolute;
+  color:white;
+  font-size:8px;
+  opacity:.8;
+  animation:twinkle 2s infinite alternate;
+}
+@keyframes twinkle{
+  from{opacity:.3}
+  to{opacity:1}
+}
+
+/* BULAN */
+.moon{
+  position:fixed;
+  top:25px;
+  right:25px;
+  width:70px;
+  height:70px;
+  background:white;
+  border-radius:50%;
+  box-shadow:0 0 30px rgba(255,255,255,.6);
+}
+
+/* BINTANG BETHLEHEM */
+.bethlehem-star{
+  position:fixed;
+  top:70px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:36px;
+  color:gold;
+  text-shadow:0 0 25px gold;
+  animation:glow 2s infinite alternate;
+}
+@keyframes glow{
+  from{opacity:.6}
+  to{opacity:1}
+}
+
+/* CARD */
+.card{
+  background:rgba(255,255,255,.12);
+  backdrop-filter:blur(8px);
+  border-radius:22px;
+  padding:26px;
+  width:92%;
+  max-width:420px;
+  text-align:center;
+  box-shadow:0 20px 40px rgba(0,0,0,.6);
+  z-index:2;
+}
+
+h1{
+  font-size:22px;
+  color:#fff;
+  text-shadow:0 0 10px gold;
+}
+
+.subtitle{
+  margin-top:12px;
+  font-size:14px;
+  line-height:1.7;
+  color:#eaeaea;
+}
+
+button{
+  width:100%;
+  margin-top:18px;
+  padding:14px;
+  font-size:16px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(135deg,#ffd700,#ffae00);
+  color:#000;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:disabled{
+  background:#777;
+  color:#ddd;
+}
+
+.verse{
+  margin-top:16px;
+  padding:16px;
+  background:rgba(255,255,255,.9);
+  color:#0b1d4d;
+  border-radius:14px;
+  display:none;
+  animation:fade .6s ease;
+}
+@keyframes fade{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1}
+}
+
+.footer{
+  margin-top:14px;
+  font-size:13px;
+  color:#dfffdc;
+}
+
+/* DESA BETHLEHEM */
+.bethlehem{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  height:160px;
+  background:black;
+  clip-path:polygon(
+    0 100%,10% 60%,20% 100%,30% 55%,40% 100%,
+    50% 45%,60% 100%,70% 55%,80% 100%,90% 60%,100% 100%
+  );
+}
+</style>
+</head>
+
+<body>
+
+<div class="moon"></div>
+<div class="bethlehem-star">⭐</div>
+<div class="bethlehem"></div>
+
+<div class="card">
+  <h1>🎄 Merry Christmas 🎄</h1>
+
+  <div class="subtitle">
+    🌙⭐🐑🐪<br><br>
+    Para gembala berjaga,<br>
+    orang Majus mengikuti bintang,<br>
+    terang Kristus datang ke dunia ✨
+  </div>
+
+  <button id="btn" onclick="showVerse()">🌟 Buka Ayat Natal</button>
+
+  <div class="verse" id="verse"></div>
+
+  <div class="footer">God Bless you 🤍</div>
+</div>
+
+<script>
+/* BINTANG */
+for(let i=0;i<45;i++){
+  let s=document.createElement("div");
+  s.className="star";
+  s.innerHTML="✦";
+  s.style.left=Math.random()*100+"vw";
+  s.style.top=Math.random()*70+"vh";
+  s.style.animationDuration=(2+Math.random()*3)+"s";
+  document.body.appendChild(s);
+}
+
+const verses = [
+"📖 Yesaya 9:5-6<br>Sebab seorang anak telah lahir untuk kita, seorang putera telah diberikan untuk kita; lambang pemerintahan ada di atas bahu-Nya dan namanya disebutkan: Penasihat Ajaib, Allah yang Perkasa, Bapa yang Kekal, Raja Damai.",
+
+"📖 Lukas 2:10-11<br>Jangan takut, sebab sesungguhnya aku memberitakan kepadamu kesukaan besar untuk seluruh bangsa: Hari ini telah lahir bagimu Juruselamat, yaitu Kristus, Tuhan.",
+
+"📖 Yohanes 1:12<br>Tetapi semua orang yang menerima-Nya diberi-Nya kuasa supaya menjadi anak-anak Allah.",
+
+"📖 Yohanes 1:14<br>Firman itu telah menjadi manusia, dan diam di antara kita, dan kita telah melihat kemuliaan-Nya.",
+
+"📖 Roma 15:13<br>Allah sumber pengharapan memenuhi kamu dengan segala sukacita dan damai sejahtera dalam iman.",
+
+"📖 Filipi 4:4-5<br>Bersukacitalah senantiasa dalam Tuhan! Hendaklah kebaikan hatimu diketahui semua orang.",
+
+"📖 Filipi 4:6-7<br>Janganlah hendaknya kamu kuatir tentang apa pun juga, tetapi nyatakanlah keinginanmu kepada Allah dalam doa.",
+
+"📖 Mazmur 16:11<br>Di hadapan-Mu ada sukacita berlimpah-limpah, di tangan kanan-Mu ada nikmat senantiasa.",
+
+"📖 Mazmur 118:24<br>Inilah hari yang dijadikan TUHAN, marilah kita bersukacita dan bersenang-senang karenanya.",
+
+"📖 Amsal 17:22<br>Hati yang gembira adalah obat yang manjur.",
+
+"📖 Yesaya 41:10<br>Janganlah takut, sebab Aku menyertai engkau; jangan bimbang, sebab Aku ini Allahmu.",
+
+"📖 Mazmur 46:2-3<br>Allah itu bagi kita tempat perlindungan dan kekuatan, sebagai penolong dalam kesesakan sangat terbukti.",
+
+"📖 Yeremia 29:11<br>Aku mengetahui rancangan-rancangan damai sejahtera dan bukan kecelakaan.",
+
+"📖 Roma 8:28<br>Allah turut bekerja dalam segala sesuatu untuk mendatangkan kebaikan.",
+
+"📖 2 Korintus 12:9<br>Cukuplah kasih karunia-Ku bagimu, sebab justru dalam kelemahanlah kuasa-Ku menjadi sempurna.",
+
+"📖 Mazmur 34:19-20<br>Orang benar mengalami banyak kesusahan, tetapi TUHAN melepaskan dia dari semuanya itu.",
+
+"📖 Yohanes 14:27<br>Damai sejahtera Kutinggalkan bagimu. Damai sejahtera-Ku Kuberikan kepadamu.",
+
+"📖 Mazmur 23:1-3<br>TUHAN adalah gembalaku, takkan kekurangan aku. Ia menyegarkan jiwaku.",
+
+"📖 Yesaya 43:2<br>Apabila engkau menyeberang melalui air, Aku akan menyertai engkau.",
+
+"📖 Ratapan 3:22-23<br>Tak berkesudahan kasih setia TUHAN, selalu baru tiap pagi.",
+
+"📖 Roma 5:8<br>Akan tetapi Allah menunjukkan kasih-Nya kepada kita oleh karena Kristus telah mati untuk kita.",
+
+"📖 Yohanes 3:16<br>Karena begitu besar kasih Allah akan dunia ini.",
+
+"📖 Kolose 3:15<br>Hendaklah damai sejahtera Kristus memerintah dalam hatimu.",
+
+"📖 Ibrani 13:8<br>Yesus Kristus tetap sama, baik kemarin maupun hari ini dan sampai selama-lamanya.",
+
+"📖 Mazmur 121:1-2<br>Pertolonganku ialah dari TUHAN yang menjadikan langit dan bumi.",
+
+"📖 Matius 11:28<br>Marilah kepada-Ku, semua yang letih lesu dan berbeban berat.",
+
+"📖 Mazmur 30:6<br>Tangisan boleh tinggal untuk waktu malam, tetapi sorak-sorai datang di waktu pagi.",
+
+"📖 Yesaya 26:3<br>Yang hatinya teguh Kaujagai dengan damai sejahtera.",
+
+"📖 Zefanya 3:17<br>TUHAN Allahmu ada di antaramu sebagai pahlawan yang memberi kemenangan.",
+
+"📖 Roma 12:12<br>Bersukacitalah dalam pengharapan, sabarlah dalam kesesakan.",
+
+"📖 Mazmur 37:5<br>Serahkanlah hidupmu kepada TUHAN dan percayalah kepada-Nya.",
+
+"📖 Amsal 3:5-6<br>Percayalah kepada TUHAN dengan segenap hatimu.",
+
+"📖 Yohanes 16:33<br>Dalam dunia kamu menderita penganiayaan, tetapi kuatkanlah hatimu.",
+
+"📖 Mazmur 62:6<br>Hanya dekat Allah saja aku tenang.",
+
+"📖 1 Petrus 5:7<br>Serahkanlah segala kekuatiranmu kepada-Nya.",
+
+"📖 Mazmur 19:9<br>Perintah TUHAN itu benar, menyukakan hati.",
+
+"📖 Efesus 2:8-9<br>Sebab karena kasih karunia kamu diselamatkan oleh iman.",
+
+"📖 Mazmur 95:1-2<br>Marilah kita bersorak-sorai untuk TUHAN.",
+
+"📖 Yesaya 60:1<br>Bangkitlah, menjadi teranglah, sebab terangmu datang.",
+
+"📖 Lukas 1:78-79<br>Oleh rahmat dan belas kasihan Allah kita, Ia akan menyinari mereka yang diam dalam kegelapan.",
+
+"📖 Yohanes 8:12<br>Akulah terang dunia; barangsiapa mengikut Aku, ia tidak akan berjalan dalam kegelapan.",
+
+"📖 Mazmur 28:7<br>TUHAN adalah kekuatanku dan perisaiku.",
+
+"📖 Roma 6:23<br>Karunia Allah ialah hidup yang kekal dalam Kristus Yesus.",
+
+"📖 Matius 5:16<br>Biarlah terangmu bercahaya di depan orang.",
+
+"📖 Mazmur 126:5<br>Orang-orang yang menabur dengan mencucurkan air mata, akan menuai dengan sorak-sorai.",
+
+"📖 Yesaya 12:2<br>Allah itu keselamatanku, aku percaya dengan tidak gemetar.",
+
+"📖 Wahyu 21:4<br>Allah akan menghapus segala air mata dari mata mereka.",
+
+"📖 Lukas 2:14<br>Kemuliaan bagi Allah di tempat yang mahatinggi dan damai sejahtera di bumi."
+];
+
+
+function showVerse(){
+  const v=document.getElementById("verse");
+  const b=document.getElementById("btn");
+  b.disabled=true;
+  b.innerHTML="⏳ Menanti terang...";
+  setTimeout(()=>{
+    v.innerHTML="✨ Ayat Natal ✨<br><br>"+verses[Math.floor(Math.random()*verses.length)];
+    v.style.display="block";
+    b.innerHTML="🔒 Ayat Dibuka";
+  },2500);
+}
+</script>
+
+</body>
+</html>
